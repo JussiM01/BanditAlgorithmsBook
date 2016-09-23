@@ -1,3 +1,5 @@
+import random
+
 class EpsilonGreedy():
     def __init__(self, epsilon, counts, values):
         self.epsilon = epsilon

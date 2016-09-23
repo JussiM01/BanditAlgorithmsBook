@@ -1,3 +1,5 @@
+import random
+
 class BernoulliArm():
     def __init__(self, p):
         self.p = p
