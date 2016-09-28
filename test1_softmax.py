@@ -9,8 +9,7 @@ n_arms = len(means)
 random.shuffle(means)
 arms = map(lambda (mu): BernoulliArm(mu), means)
 print("Best arm is " + str(ind_max(means)))
-
-f = open("algorithms/softmax/standard_softmax/softmax_results.tsv", "w")
+f = open("softmax_results.tsv", "w+S")
 
 for temperature in [0.1, 0.2, 0.3, 0.4, 0.5]:
     algo = Softmax(temperature, [], [])
