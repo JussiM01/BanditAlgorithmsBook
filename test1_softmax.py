@@ -1,8 +1,7 @@
-execfile("core.py")
-
 import random
 from softmax import *
 from Bernoulliarm import *
+from bandittestframe import *
 
 random.seed(1)
 means = [0.1, 0.1, 0.1, 0.1, 0.9]

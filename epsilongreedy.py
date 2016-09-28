@@ -1,5 +1,9 @@
 import random
 
+def ind_max(x):
+    m = max(x)
+    return x.index(m)
+
 class EpsilonGreedy():
     def __init__(self, epsilon, counts, values):
         self.epsilon = epsilon
@@ -11,10 +15,6 @@ class EpsilonGreedy():
         self.counts = [0 for col in range(n_arms)]
         self.values = [0.0 for col in range(n_arms)]
         return
-
-    def ind_max(x):
-        m = max(x)
-        return x.index(m)
 
     def select_arm(self):
         if random.random() > self.epsilon:

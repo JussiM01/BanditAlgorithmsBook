@@ -1,29 +1,31 @@
-from Bernoulliarm import *
+from bernoulliarm import *
 
 means = [0.1, 0.1, 0.1, 0.1, 0.9]
 n_arms = len(means)
 random.shuffle(means)
-arms = map(lambda (mu): BernoulliArm(mu), means)
+arms = map(lambda mu: BernoulliArm(mu), means)
 
 def test_algorithm(algo, arms, num_sims, horizon):
     chosen_arms = [0.0 for i in range(num_sims * horizon)]
-    rewards = [0.0 for in range(num_sims * horizon)]
-    cumulative_rewards = [0.0 for i range(num_sims * horizon)]
+    rewards = [0.0 for i in range(num_sims * horizon)]
+    cumulative_rewards = [0.0 for i in range(num_sims * horizon)]
     sim_nums = [0.0 for i in range(num_sims *  horizon)]
+    times = [0.0 for i in range(num_sims *  horizon)]
 
     for sim in range(num_sims):
         sim = sim + 1
-        algo.initialize(len(arms))
+        algo.initialize(len(list(arms)))
 
         for t in range(horizon):
             t = t + 1
             index = (sim - 1) * horizon + t - 1
-            sim_nums[index] = t
+            sim_nums[index] = sim
+            times[index] = t
 
             chosen_arm = algo.select_arm()
             chosen_arms[index] = chosen_arm
 
-            reward = arms[chosen_arms[index]].draw()
+            reward = list(arms)[chosen_arms[index]].draw()
             rewards[index] = reward
 
             if t == 1:
