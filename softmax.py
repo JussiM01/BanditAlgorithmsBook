@@ -1,6 +1,10 @@
 import math
 import random
 
+def ind_max(x):
+    m = max(x)
+    return x.index(m)
+
 def categorical_draw(probs):
     z = random.random()
     cum_prob = 0.0
@@ -20,6 +24,11 @@ class Softmax:
         return
 
     def initialize(self, n_arms):
+        self.counts = [0 for col in range(n_arms)]
+        self.values = [0.0 for col in range(n_arms)]
+        return
+
+    def select_arm(self):
         z = sum([math.exp(v / self.temperature) for v in self.values])
         probs = [math.exp(v / self.temperature) / z for v in self.values]
         return categorical_draw(probs)
@@ -29,6 +38,6 @@ class Softmax:
         n = self.counts[chosen_arm]
 
         value = self.values[chosen_arm]
-        new_value = ((n - 1) / float(n)) * value (1 / float(n)) * reward
+        new_value = ((n - 1) / float(n)) * value + (1 / float(n)) * reward
         self.values[chosen_arm] = new_value
         return

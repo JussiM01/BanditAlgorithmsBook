@@ -1,15 +1,15 @@
 import random
 from softmax import *
-from Bernoulliarm import *
+from bernoulliarm import *
 from bandittestframe import *
 
 random.seed(1)
 means = [0.1, 0.1, 0.1, 0.1, 0.9]
 n_arms = len(means)
 random.shuffle(means)
-arms = map(lambda (mu): BernoulliArm(mu), means)
+arms = [BernoulliArm(mu) for mu in means]
 print("Best arm is " + str(ind_max(means)))
-f = open("softmax_results.tsv", "w+S")
+f = open("softmax_results.tsv", "w+")
 
 for temperature in [0.1, 0.2, 0.3, 0.4, 0.5]:
     algo = Softmax(temperature, [], [])
