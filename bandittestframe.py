@@ -1,10 +1,5 @@
 from bernoulliarm import *
 
-means = [0.1, 0.1, 0.1, 0.1, 0.9]
-n_arms = len(means)
-random.shuffle(means)
-arms = map(lambda mu: BernoulliArm(mu), means)
-
 def test_algorithm(algo, arms, num_sims, horizon):
     chosen_arms = [0.0 for i in range(num_sims * horizon)]
     rewards = [0.0 for i in range(num_sims * horizon)]
@@ -14,7 +9,7 @@ def test_algorithm(algo, arms, num_sims, horizon):
 
     for sim in range(num_sims):
         sim = sim + 1
-        algo.initialize(len(list(arms)))
+        algo.initialize(len(arms))
 
         for t in range(horizon):
             t = t + 1
@@ -25,7 +20,7 @@ def test_algorithm(algo, arms, num_sims, horizon):
             chosen_arm = algo.select_arm()
             chosen_arms[index] = chosen_arm
 
-            reward = list(arms)[chosen_arms[index]].draw()
+            reward = arms[chosen_arms[index]].draw()
             rewards[index] = reward
 
             if t == 1:
